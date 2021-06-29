@@ -11,6 +11,12 @@ import java.util.List;
 /*
   This class represents an error that returned from the query result
  */
+
+/**
+ * In this lite version:
+ * - We commented out isPermanent()
+ * - We changed DataWebException into Exception in KustoServiceQueryError()
+ */
 public class KustoServiceQueryError extends Exception {
     private final List<Exception> exceptions;
 
@@ -41,11 +47,11 @@ public class KustoServiceQueryError extends Exception {
         return exceptions.isEmpty() ? getMessage() : "exceptions\":" + exceptions + "}";
     }
 
-    public boolean isPermanent() {
-        if (exceptions.size() > 0 && exceptions.get(0) instanceof Exception) {
-            return ((Exception) exceptions.get(0)).getApiError().isPermanent();
-        }
-
-        return false;
-    }
+//    public boolean isPermanent() {
+//        if (exceptions.size() > 0 && exceptions.get(0) instanceof DataWebException) {
+//            return ((DataWebException) exceptions.get(0)).getApiError().isPermanent();
+//        }
+//
+//        return false;
+//    }
 }
