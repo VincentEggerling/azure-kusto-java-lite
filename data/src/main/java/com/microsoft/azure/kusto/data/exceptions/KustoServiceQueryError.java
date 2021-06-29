@@ -19,7 +19,7 @@ public class KustoServiceQueryError extends Exception {
         this.exceptions = new ArrayList<>();
         for (int j = 0; j < jsonExceptions.length(); j++) {
             if (isOneApi) {
-                this.exceptions.add(new DataWebException(jsonExceptions.getJSONObject(j).toString()));
+                this.exceptions.add(new Exception(jsonExceptions.getJSONObject(j).toString()));
             } else {
                 this.exceptions.add(new Exception(jsonExceptions.getString(j)));
             }
@@ -42,8 +42,8 @@ public class KustoServiceQueryError extends Exception {
     }
 
     public boolean isPermanent() {
-        if (exceptions.size() > 0 && exceptions.get(0) instanceof DataWebException) {
-            return ((DataWebException) exceptions.get(0)).getApiError().isPermanent();
+        if (exceptions.size() > 0 && exceptions.get(0) instanceof Exception) {
+            return ((Exception) exceptions.get(0)).getApiError().isPermanent();
         }
 
         return false;
